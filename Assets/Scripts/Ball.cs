@@ -4,14 +4,15 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] private float initialSpeed = 8f;
     [SerializeField] private float velocityMultiplierOnPaddleHit = 1.1f;
+    [SerializeField] private AudioSource audioSource;
     private Rigidbody2D rb;
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Launch();
@@ -29,6 +30,7 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Paddle"))
         {
             rb.linearVelocity *= velocityMultiplierOnPaddleHit;
+            audioSource.Play();
         }
     }
 
